@@ -30,7 +30,7 @@ print(count)
 # #Case 2 
 # #블로그 참조
 # N = int(input())
-# cnt = 0
+# cnt = N
 
 # for i in range(N):
 #     word = input()
