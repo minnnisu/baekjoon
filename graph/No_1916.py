@@ -1,17 +1,14 @@
 import heapq
+N = int(input())
+M = int(input())
 
-V, E = map(int, input().split(" "))
-s = int(input())
 INF = int(1e9)
-graph = [[] for _ in range(V + 1)]
-distance = [INF] * (V + 1)
+graph = [[] for _ in range(N + 1)]
+distance = [INF] * (N + 1)
 
-
-
-for _ in range(E):
+for _ in range(M):
     a, b, w = map(int, input().split(" "))
     graph[a].append((b, w))
-
 
 def dijkstra(start):
     q = []
@@ -20,22 +17,17 @@ def dijkstra(start):
 
     while q:
         dist, now = heapq.heappop(q)
-
         if(distance[now] < dist):
             continue
 
         for node in graph[now]:
             next, wei = node
-            next_dist = dist + wei
+            next_dist = wei + dist
 
-            if(distance[next] > next_dist):
+            if(next_dist < distance[next]):
                 heapq.heappush(q, (next_dist, next))
                 distance[next] = next_dist
 
+s, e = map(int, input().split(" "))
 dijkstra(s)
-
-for i in range(1, V + 1):
-    if(distance[i] == INF):
-        print("INF")
-    else:
-        print(distance[i])
+print(distance[e])
